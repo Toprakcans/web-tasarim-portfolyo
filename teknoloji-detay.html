@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknoloji Firması Web Sitesi - Proje Detayları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .detail-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item::after {
+            content: '💻';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .pricing-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-phone {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            font-size: 1.2rem;
+            padding: 20px 40px;
+            margin: 20px 10px;
+        }
+
+        .timeline {
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .timeline-number {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .services-offered {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .service-offered {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #ff9a9e;
+        }
+
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-feature {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #2196f3;
+        }
+
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .detail-content {
+                padding: 30px 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Ana Sayfaya Dön</a>
+        
+        <div class="header">
+            <h1>💻 Teknoloji Firması Web Sitesi</h1>
+            <p>Yenilikçi ve Dinamik Kurumsal Platform</p>
+        </div>
+
+        <div class="detail-content">
+            <h2 style="color: #ff9a9e; margin-bottom: 30px; font-size: 2.5rem;">Proje Hakkında</h2>
+            
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #666;">
+                Modern teknoloji firmaları için yenilikçi, dinamik ve etkileyici kurumsal web sitesi. 
+                Proje portfolyosu, ekip profilleri, blog sistemi ve çoklu dil desteği ile 
+                teknoloji şirketinizin dijital varlığını güçlendirin.
+            </p>
+
+            <div class="portfolio-stats">
+                <div class="stat-box">
+                    <div class="stat-number">100+</div>
+                    <p>Tamamlanan Proje</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <p>Mutlu Müşteri</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <p>Teknik Destek</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">5⭐</div>
+                    <p>Müşteri Memnuniyeti</p>
+                </div>
+            </div>
+
+            <div class="project-gallery">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+
+            <h3 style="color: #333; margin: 40px 0 20px 0; font-size: 2rem;">🚀 Kurumsal Platform Özellikleri</h3>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">💼</div>
+                    <h4>Proje Portfolyosu</h4>
+                    <p>Tamamlanan projeler, case study'ler ve başarı hikayeleri</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h4>Ekip Profilleri</h4>
+                    <p>Uzman ekip üyeleri, deneyimler ve uzmanlık alanları</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📰</div>
+                    <h4>Teknoloji Blog</h4>
+                    <p>Sektör makaleleri, teknoloji trendleri ve şirket haberleri</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🌍</div>
+                    <h4>Çoklu Dil Desteği</h4>
+                    <p>Türkçe, İngilizce ve diğer dillerde uluslararası erişim</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📧</div>
+                    <h4>İletişim Sistemi</h4>
+                    <p>Proje talep formu, teklif sistemi ve canlı destek</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Lead Generation</h4>
+                    <p>Potansiyel müşteri yakalama ve CRM entegrasyonu</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Analytics Dashboard</h4>
+                    <p>Ziyaretçi analizi, performans metrikleri ve raporlama</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔗</div>
+                    <h4>API Entegrasyonları</h4>
+                    <p>Third-party servisler ve sosyal medya bağlantıları</p>
+                </div>
+            </div>
+
+            <h3 style="color: #333; margin: 40px 0 20px 0; font-size: 2rem;">⚙️ Sunulan Teknoloji Hizmetleri</h3>
+            
+            <div class="services-offered">
+                <div class="service-offered">
+                    <h4>🌐 Web Geliştirme</h4>
+                    <p>Full-stack çözümler</p>
+                </div>
+                <div class="service-offered">
+                    <h4>📱 Mobil Uygulama</h4>
+                    <p>iOS ve Android apps</p>
+                </div>
+                <div class="service-offered">
+                    <h4>☁️ Cloud Çözümleri</h4>
+                    <p>AWS, Azure, GCP</p>
+                </div>
+                <div class="service-offered">
+                    <h4>🤖 AI/ML Çözümleri</h4>
+                    <p>Yapay zeka projeleri</p>
+                </div>
+                <div class="service-offered">
+                    <h4>🔒 Siber Güvenlik</h4>
+                    <p>Güvenlik danışmanlığı</p>
+                </div>
+                <div class="service-offered">
+                    <h4>📊 Data Analytics</h4>
+                    <p>Büyük veri analizi</p>
+                </div>
+                <div class="service-offered">
+                    <h4>🔧 DevOps</h4>
+                    <p>CI/CD pipeline</p>
+                </div>
+                <div class="service-offered">
+                    <h4>🎨 UI/UX Tasarım</h4>
+                    <p>Kullanıcı deneyimi</p>
+                </div>
+            </div>
+
+            <h3 style="color: #333; margin: 40px 0 20px 0; font-size: 2rem;">🔥 İleri Teknoloji Özellikleri</h3>
+            
+            <div class="tech-features">
+                <div class="tech-feature">
+                    <h4>🚀 Progressive Web App</h4>
+                    <p>Mobil uygulama deneyimi</p>
+                </div>
+                <div class="tech-feature">
+                    <h4>⚡ Server-Side Rendering</h4>
+                    <p>Süper hızlı yükleme</p>
+                </div>
+                <div class="tech-feature">
+                    <h4>🔍 Advanced SEO</h4>
+                    <p>Teknik SEO optimizasyonu</p>
+                </div>
+                <div class="tech-feature">
+                    <h4>📊 Real-time Analytics</h4>
+                    <p>Canlı veri gösterimi</p>
+                </div>
+            </div>
+
+            <h3 style="color: #333; margin: 40px 0 20px 0; font-size: 2rem;">💻 Kullanılan Teknolojiler</h3>
+            
+            <div class="tech-stack">
+                <div class="tech-item">React.js</div>
+                <div class="tech-item">Next.js</div>
+                <div class="tech-item">Node.js</div>
+                <div class="tech-item">TypeScript</div>
+                <div class="tech-item">GraphQL</div>
+                <div class="tech-item">MongoDB</div>
+                <div class="tech-item">Docker</div>
+                <div class="tech-item">AWS</div>
+                <div class="tech-item">Redis</div>
+                <div class="tech-item">Elasticsearch</div>
+                <div class="tech-item">WebRTC</div>
+                <div class="tech-item">AI/ML APIs</div>
+            </div>
+
+            <h3 style="color: #333; margin: 40px 0 20px 0; font-size: 2rem;">⏱️ Proje Süreci</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div>
+                        <h4>Teknoloji Analizi (4-5 gün)</h4>
+                        <p>Şirket kimliği, hedef kitle ve teknoloji ihtiyaçları analizi</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div>
+                        <h4>Modern UI/UX Tasarım (6-7 gün)</h4>
+                        <p>Yenilikçi tasarım konsepti, wireframe ve prototipler</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div>
+                        <h4>Full-Stack Geliştirme (12-15 gün)</h4>
+                        <p>Frontend, backend, veritabanı ve API geliştirme</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div>
+                        <h4>Optimizasyon ve Deploy (3-4 gün)</h4>
+                        <p>Performans optimizasyonu, SEO ve cloud deployment</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-section">
+                <h3 style="font-size: 2.5rem; margin-bottom: 20px;">Proje Fiyatı</h3>
+                <div class="price">35.000 TL</div>
+                <p style="font-size: 1.2rem; margin-bottom: 30px;">
+                    Premium özellikler • Modern teknolojiler • Cloud hosting • 1 yıl premium destek
+                </p>
+                <p style="font-size: 1rem; opacity: 0.9;">
+                    ⚡ 5 hafta içinde teslim<br>
+                    🔧 En son teknolojiler kullanılır<br>
+                    📱 Mobil uygulama altyapısı dahil
+                </p>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <h3 style="margin-bottom: 30px; color: #333;">Bu Proje İlginizi mi Çekiyor?</h3>
+                <a href="tel:05326901138" class="cta-button cta-phone">📞 Hemen Arayın - 0532 690 11 38</a>
+                <br><br>
+                <a href="index.html" class="cta-button">Diğer Projeleri İnceleyin</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll animasyonları
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.feature-item, .timeline-item, .service-offered, .tech-feature, .stat-box');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            });
+            
+            items.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
