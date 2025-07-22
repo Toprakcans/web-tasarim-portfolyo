@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Tasarım & Dijital Çözümler - Portfolyo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 60px 0;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+
+        .portfolio-image::after {
+            content: '🌐';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+
+        .restaurant-bg { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); }
+        .cafe-bg { background: linear-gradient(45deg, #4ecdc4, #44a08d); }
+        .law-bg { background: linear-gradient(45deg, #667eea, #764ba2); }
+        .shop-bg { background: linear-gradient(45deg, #ffa500, #ffcd3c); }
+        .clinic-bg { background: linear-gradient(45deg, #a8e6cf, #7fcdcd); }
+        .tech-bg { background: linear-gradient(45deg, #ff9a9e, #fecfef); }
+
+        .portfolio-content {
+            padding: 30px;
+        }
+
+        .portfolio-content h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .portfolio-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .services-section {
+            background: white;
+            margin: 50px 0;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            padding: 20px;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Web Tasarım & Dijital Çözümler</h1>
+            <p>Modern, Responsive ve SEO Dostu Web Siteleri</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image restaurant-bg"></div>
+                <div class="portfolio-content">
+                    <h3>Restoran Web Sitesi</h3>
+                    <p>Gaziantep'in ünlü lezzetlerini tanıtan modern bir restoran web sitesi. Online rezervasyon sistemi ve menü yönetimi dahil.</p>
+                    <div class="features">
+                        <span class="feature-tag">Responsive Tasarım</span>
+                        <span class="feature-tag">Online Rezervasyon</span>
+                        <span class="feature-tag">Menü Yönetimi</span>
+                        <span class="feature-tag">SEO Optimizasyonu</span>
+                    </div>
+                    <a href="#" class="cta-button">Detayları Gör</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image cafe-bg"></div>
+                <div class="portfolio-content">
+                    <h3>Kafe & Bistro Sitesi</h3>
+                    <p>Şık ve modern tasarımıyla öne çıkan kafe web sitesi. Sosyal medya entegrasyonu ve etkinlik duyuru sistemi.</p>
+                    <div class="features">
+                        <span class="feature-tag">Modern Tasarım</span>
+                        <span class="feature-tag">Sosyal Medya</span>
+                        <span class="feature-tag">Etkinlik Sistemi</span>
+                        <span class="feature-tag">Hızlı Yükleme</span>
+                    </div>
+                    <a href="#" class="cta-button">Detayları Gör</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image law-bg"></div>
+                <div class="portfolio-content">
+                    <h3>Hukuk Bürosu Sitesi</h3>
+                    <p>Profesyonel ve güvenilir görünümde hukuk bürosu web sitesi. Randevu sistemi ve hukuki danışmanlık formu.</p>
+                    <div class="features">
+                        <span class="feature-tag">Profesyonel Tasarım</span>
+                        <span class="feature-tag">Randevu Sistemi</span>
+                        <span class="feature-tag">İletişim Formu</span>
+                        <span class="feature-tag">SSL Güvenlik</span>
+                    </div>
+                    <a href="#" class="cta-button">Detayları Gör</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image shop-bg"></div>
+                <div class="portfolio-content">
+                    <h3>E-Ticaret Mağazası</h3>
+                    <p>Kullanıcı dostu e-ticaret sitesi. Ürün katalogu, sepet sistemi ve güvenli ödeme altyapısı.</p>
+                    <div class="features">
+                        <span class="feature-tag">E-Ticaret</span>
+                        <span class="feature-tag">Ödeme Sistemi</span>
+                        <span class="feature-tag">Stok Yönetimi</span>
+                        <span class="feature-tag">Mobil Uyumlu</span>
+                    </div>
+                    <a href="#" class="cta-button">Detayları Gör</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image clinic-bg"></div>
+                <div class="portfolio-content">
+                    <h3>Sağlık Kliniği Sitesi</h3>
+                    <p>Hasta odaklı tasarım ve online randevu sistemi ile sağlık hizmetleri web sitesi.</p>
+                    <div class="features">
+                        <span class="feature-tag">Hasta Portalı</span>
+                        <span class="feature-tag">Online Randevu</span>
+                        <span class="feature-tag">Doktor Profilleri</span>
+                        <span class="feature-tag">KVKK Uyumlu</span>
+                    </div>
+                    <a href="#" class="cta-button">Detayları Gör</a>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image tech-bg"></div>
+                <div class="portfolio-content">
+                    <h3>Teknoloji Firması</h3>
+                    <p>Yenilikçi ve dinamik tasarımıyla teknoloji şirketi kurumsal web sitesi. Proje portfolyosu dahil.</p>
+                    <div class="features">
+                        <span class="feature-tag">Kurumsal Tasarım</span>
+                        <span class="feature-tag">Proje Portfolyosu</span>
+                        <span class="feature-tag">Blog Sistemi</span>
+                        <span class="feature-tag">Çoklu Dil</span>
+                    </div>
+                    <a href="#" class="cta-button">Detayları Gör</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-section">
+            <h2 style="text-align: center; color: #333; margin-bottom: 20px; font-size: 2.5rem;">Hizmetlerimiz</h2>
+            <p style="text-align: center; color: #666; font-size: 1.1rem;">Dijital dünyadaki tüm ihtiyaçlarınız için profesyonel çözümler</p>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">🌐</div>
+                    <h3>Web Tasarım</h3>
+                    <p>Modern, responsive ve kullanıcı dostu web siteleri</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">🛒</div>
+                    <h3>E-Ticaret</h3>
+                    <p>Tam entegre online mağaza çözümleri</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">📱</div>
+                    <h3>Mobil Uyumlu</h3>
+                    <p>Tüm cihazlarda mükemmel görünüm</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">🚀</div>
+                    <h3>SEO Optimizasyonu</h3>
+                    <p>Google'da üst sıralarda yer alma</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">📊</div>
+                    <h3>Analytics</h3>
+                    <p>Detaylı ziyaretçi analizi ve raporlama</p>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-icon">🔧</div>
+                    <h3>Teknik Destek</h3>
+                    <p>7/24 teknik destek ve bakım hizmeti</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">İletişime Geçin</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Projenizi hayata geçirmek için hemen iletişime geçin!</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>📱 Telefon</h4>
+                    <p>+90 XXX XXX XX XX</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>📧 E-posta</h4>
+                    <p>info@webtasarim.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>📍 Konum</h4>
+                    <p>Gaziantep, Türkiye</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>⏰ Çalışma Saatleri</h4>
+                    <p>Pzt-Cum: 09:00-18:00</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <a href="#" class="cta-button" style="font-size: 1.1rem; padding: 15px 35px;">Ücretsiz Teklif Alın</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll için basit animasyon
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.portfolio-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            });
+            
+            items.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(50px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+        });
+        
+        // CTA butonları için basit alert
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('İletişim bilgilerinizi bırakın, size özel teklif hazırlayalım!');
+            });
+        });
+    </script>
+</body>
+</html>
